@@ -41,7 +41,7 @@ st.markdown(
 MODEL_PATH = Path(__file__).with_name("modele_visuel.xlsx")
 MODEL_SHEET = "Planning dynamique"
 
-TITLE_RE = re.compile(r"CHANTIER\s*:.*?(?:-\s*)?LOT\b", re.I)
+TITLE_RE = re.compile(r"\bCHANTIER\s*:", re.I)
 LOT_RE = re.compile(r"\bLOT\s*[:\-]?\s*(.+)$", re.I)
 DURATION_RE = re.compile(r"dur[ée]e.*jour", re.I)
 EFFECTIF_RE = re.compile(r"effectif", re.I)
@@ -332,7 +332,7 @@ def build_planning(source_wb, template_wb):
     if not blocks:
         raise ValueError(
             "Je n'ai pas pu détecter automatiquement de bloc de planning. "
-            "Le fichier doit contenir un titre CHANTIER / LOT et une colonne 'Durée ... jours'."
+            "Le fichier doit contenir un titre CHANTIER et une colonne 'Durée ... jours'."
         )
 
     template_ws = template_wb[MODEL_SHEET]
