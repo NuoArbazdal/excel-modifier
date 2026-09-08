@@ -15,139 +15,28 @@ from openpyxl.utils import get_column_letter
 
 
 st.set_page_config(
-    page_title="Excel Modifier",
-    page_icon="📊",
+    page_title="Planning dynamique Excel",
+    page_icon="📄",
     layout="centered",
-    initial_sidebar_state="collapsed",
 )
 
 st.markdown(
     """
     <style>
-      :root {
-        --ink: #172033;
-        --muted: #6b7280;
-        --line: #e6eaf0;
-        --soft: #f7f9fc;
-        --accent: #2563eb;
-        --accent-dark: #1d4ed8;
-        --success-soft: #f0fdf4;
-      }
-
-      .stApp {
-        background:
-          radial-gradient(circle at 50% -10%, rgba(37,99,235,.08), transparent 34rem),
-          #ffffff;
-      }
-
-      header[data-testid="stHeader"] { background: transparent; }
-      .block-container { max-width: 760px; padding-top: 5.5rem; padding-bottom: 4rem; }
-      #MainMenu, footer { visibility: hidden; }
-
-      .brand {
-        width: 48px; height: 48px; margin: 0 auto 1.15rem;
-        display: flex; align-items: center; justify-content: center;
-        border-radius: 14px; background: var(--ink); color: white;
-        font-size: 1.45rem; box-shadow: 0 10px 28px rgba(23,32,51,.13);
-      }
-
-      .main-title {
-        text-align: center; color: var(--ink);
-        font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.08;
-        letter-spacing: -.04em; font-weight: 800; margin-bottom: .8rem;
-      }
-
-      .sub {
-        max-width: 590px; margin: 0 auto 2.2rem; text-align: center;
-        color: var(--muted); font-size: 1rem; line-height: 1.6;
-      }
-
-      .steps {
-        display: flex; justify-content: center; align-items: center;
-        gap: .65rem; margin-bottom: 1.15rem; color: #8a93a3;
-        font-size: .82rem; font-weight: 600;
-      }
-      .steps .dot { width: 5px; height: 5px; border-radius: 999px; background: #cbd2dc; }
-
-      [data-testid="stFileUploader"] { margin-top: .3rem; }
-      [data-testid="stFileUploaderDropzone"] {
-        min-height: 190px; padding: 2rem 1.25rem;
-        border: 1.5px dashed #cbd5e1; border-radius: 20px;
-        background: rgba(247,249,252,.78);
-        transition: border-color .18s ease, background .18s ease;
-      }
-      [data-testid="stFileUploaderDropzone"]:hover {
-        border-color: #8da9e8; background: #f5f8ff;
-      }
-      [data-testid="stFileUploaderDropzone"] button {
-        border-radius: 10px !important; border: 1px solid var(--line) !important;
-        background: white !important; color: var(--ink) !important;
-        font-weight: 650 !important; box-shadow: 0 1px 2px rgba(15,23,42,.04);
-      }
-      [data-testid="stFileUploaderFile"] { border-radius: 12px; }
-
-      /* Centre uniquement la ligne du fichier une fois sélectionné */
-      [data-testid="stFileUploader"] section + div,
-      [data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] {
-        margin-left: auto !important;
-        margin-right: auto !important;
-      }
-      [data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] {
-        width: fit-content !important;
-        max-width: 90% !important;
-      }
-
-      .privacy-note {
-        margin: .9rem auto 0; text-align: center; color: #98a1b0; font-size: .78rem;
-      }
-      [data-testid="stStatusWidget"], [data-testid="stAlert"] { border-radius: 14px; }
-
-      .result-card {
-        margin: 1.15rem 0 .75rem; padding: 1rem 1.05rem;
-        display: flex; align-items: center; gap: .85rem;
-        border: 1px solid #d9efe0; border-radius: 16px; background: var(--success-soft);
-      }
-      .result-icon {
-        width: 34px; height: 34px; flex: 0 0 34px;
-        display: flex; align-items: center; justify-content: center;
-        border-radius: 10px; background: #dcfce7; font-size: 1rem;
-      }
-      .result-title { color: #166534; font-size: .94rem; font-weight: 750; line-height: 1.25; }
-      .result-sub { margin-top: .12rem; color: #4f6f59; font-size: .8rem; }
-
-      .stDownloadButton > button {
-        min-height: 3.15rem; border: 0 !important; border-radius: 12px !important;
-        background: #f7f9ff !important; color: #2563eb !important;
-        border: 1px solid #d7e2ff !important;
-        font-weight: 650 !important; box-shadow: 0 4px 14px rgba(37,99,235,.07);
-        transition: background .18s ease, box-shadow .18s ease;
-      }
-      .stDownloadButton > button:hover {
-        background: #eef3ff !important;
-        border-color: #c6d5ff !important;
-        box-shadow: 0 5px 16px rgba(37,99,235,.10);
-      }
-
-      @media (max-width: 640px) {
-        .block-container { padding-top: 3.4rem; padding-left: 1.15rem; padding-right: 1.15rem; }
-        .steps { font-size: .75rem; gap: .45rem; }
-        [data-testid="stFileUploaderDropzone"] { min-height: 165px; }
-      }
+      .block-container {max-width: 760px; padding-top: 4rem;}
+      .main-title {text-align:center; font-size:2rem; font-weight:700; margin-bottom:.45rem;}
+      .sub {text-align:center; color:#777; margin-bottom:2rem;}
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-st.markdown('<div class="brand">↗</div>', unsafe_allow_html=True)
-st.markdown('<div class="main-title">Transformez votre fichier Excel</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">Dépose ton fichier Excel</div>', unsafe_allow_html=True)
 st.markdown(
-    '<div class="sub">Déposez votre fichier : le planning dynamique est généré automatiquement, sans réglage ni étape supplémentaire.</div>',
+    '<div class="sub">Le planning dynamique est créé automatiquement. Le fichier modèle sert uniquement à la mise en page.</div>',
     unsafe_allow_html=True,
 )
-st.markdown(
-    '<div class="steps"><span>1. Déposer</span><span class="dot"></span><span>2. Traitement automatique</span><span class="dot"></span><span>3. Télécharger</span></div>',
-    unsafe_allow_html=True,
-)
+
 
 MODEL_PATH = Path(__file__).with_name("modele_visuel.xlsx")
 MODEL_SHEET = "Planning dynamique"
@@ -697,19 +586,14 @@ def process_file(file_bytes: bytes, original_name: str) -> bytes:
 
 
 uploaded = st.file_uploader(
-    "Déposez votre fichier Excel ici",
+    "Dépose ton document ici",
     type=["xls", "xlsx"],
     label_visibility="collapsed",
 )
 
-st.markdown(
-    '<div class="privacy-note">Formats acceptés : .xls et .xlsx · Aucun paramétrage nécessaire</div>',
-    unsafe_allow_html=True,
-)
-
 if uploaded is not None:
     try:
-        with st.spinner("Création de votre planning..."):
+        with st.spinner("Création du planning dynamique..."):
             result = process_file(uploaded.getvalue(), uploaded.name)
 
         lower_name = uploaded.name.lower()
@@ -720,20 +604,9 @@ if uploaded is not None:
         else:
             output_name = "fichier_planning.xlsx"
 
-        st.markdown(
-            f"""
-            <div class="result-card">
-              <div class="result-icon">✓</div>
-              <div>
-                <div class="result-title">Votre fichier est prêt</div>
-                <div class="result-sub">{output_name}</div>
-              </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        st.success("Planning créé avec succès.")
         st.download_button(
-            "Télécharger le fichier modifié",
+            "Récupérer le fichier modifié",
             data=result,
             file_name=output_name,
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
