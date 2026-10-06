@@ -284,8 +284,17 @@ def detect_all_blocks(wb, values_wb=None):
     unique = {}
     for block in candidates:
         src = wb[block["sheet"]]
+        # La phase fait partie de la signature.
+        # Sans cela, des phases différentes avec les mêmes tâches étaient
+        # supprimées comme de faux doublons.
+        phase_text = ""
+        if block["lot_label"]:
+            phase_row, phase_col = block["lot_label"]
+            phase_text = src.cell(phase_row, phase_col).value
+
         signature = (
             _norm_text(block["title_text"]),
+            _norm_text(phase_text),
             tuple(_norm_text(src.cell(r, block["task_col"]).value) for r in block["task_rows"]),
         )
         current = unique.get(signature)
